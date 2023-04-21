@@ -9,10 +9,12 @@ public class GameWindow {
         this.jframe = new JFrame();    // Create JFrame
 
         // Set up JFrame
-        jframe.setSize(400, 400);
         jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);  
         jframe.add(gamePanel);  // Add game panel to JFrame
         jframe.setLocationRelativeTo(null);     // Spawn window in the center
+        jframe.setResizable(false); // Resize is prohibitted
+        jframe.pack();  // Fit size to game panel
+        
         jframe.setVisible(true);
     }
 }
