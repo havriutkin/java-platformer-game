@@ -22,7 +22,7 @@ public class Player extends Entity{
     
     public Player(float x, float y){
         super(x, y);
-        loadAnimations();
+        loadAnimationsFromDir();
     }
 
     public void update(){
@@ -36,13 +36,24 @@ public class Player extends Entity{
     }
 
     // Loading resources
-    private void loadAnimations() {
+    private void loadAnimationsFromAtlas() {
         BufferedImage img = LoadSave.GetSpriteAtlas(LoadSave.PLAYER_ATLAS);
 
         animations = new BufferedImage[10][10];
         for(int i = 0; i < animations.length; i++)
             for(int j = 0; j < animations[i].length; j++)
                 animations[i][j] = img.getSubimage(j*128, i*128, 128, 128);
+    }
+
+    private void loadAnimationsFromDir(){
+        BufferedImage[] images = LoadSave.GetSpriteArray(LoadSave.PLAYER_DIR);
+
+        animations = new BufferedImage[images.length][];
+        for(int i = 0; i < animations.length; i++){
+            animations[i] = new BufferedImage[images[i].getWidth() / 128];
+            for(int j = 0; j < animations[i].length; j++)
+                animations[i][j] = images[i].getSubimage(j * 128, 0, 128, 128);
+        }
     }
 
 
